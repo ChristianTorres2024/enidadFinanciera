@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +44,14 @@ public class ClientService implements IClientServices, IConvertEntityClientDTO {
 
 	@Override
 	public List<ClientDTO> getAllClients() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<ClientEntity> clientEntities = clientRepository.findAll();
+		
+		List<ClientDTO> clientDTOs = clientEntities.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+		
+		return clientDTOs;
 	}
 
 	@Override

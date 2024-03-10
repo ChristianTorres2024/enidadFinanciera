@@ -49,11 +49,9 @@ public class ClientRestController {
     }
     
     @GetMapping("/getAllClients")
-    private ResponseEntity<List<ClientDTO>> getAllClients(@RequestParam("typeID") String parametro1, @RequestParam("numberID") String parametro2) {
-        
-    	log.info("Parametro 1: {}", parametro1);
-        log.info("Parametro 2: {}", parametro2);
-        List<ClientDTO> clients = new ArrayList<ClientDTO>();     
+    private ResponseEntity<List<ClientDTO>> getAllClients() {
+            
+        List<ClientDTO> clients = clientService.getAllClients();     
         return ResponseEntity.status(HttpStatus.OK).body(clients);
     }    	
     
