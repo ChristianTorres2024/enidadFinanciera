@@ -47,11 +47,32 @@ public class ProductService implements IProductsServices {
 			ProductEntity product = productsRepository.findById(id).orElse(null);
 			return convertEntityProductDTO.convertToDTO(product);
 		} catch (Exception e) {
-			log.error("Error create client {}", e.getCause(), e.getMessage());
+			log.error("Error getProductById {}", e.getCause(), e.getMessage());
 			return null;
 		}
 	}
 
+	@Override
+	public List<ProductDTO> getProductByIdClient(Long idClient) {
+		try {
+			
+			List<ProductEntity> productEntities = productsRepository.findByClientEntityIdClient(idClient);
+
+	        if (productEntities != null && !productEntities.isEmpty()) {
+	        	List<ProductDTO> productDTOs = productEntities.stream().map(convertEntityProductDTO::convertToDTO)
+						.collect(Collectors.toList());
+	        	
+	            return productDTOs;
+	        } else {
+	            return null;
+	        }
+			
+		} catch (Exception e) {
+			log.error("Error getProductByIdClient {}", e.getCause(), e.getMessage());
+			return null;
+		}
+	}
+	
 	@Override
 	public List<ProductDTO> getAllProduct() {
 		try {
@@ -62,14 +83,14 @@ public class ProductService implements IProductsServices {
 
 			return productDTOs;
 		} catch (Exception e) {
-			log.error("Error create client {}", e.getCause(), e.getMessage());
+			log.error("Error getAllProduct {}", e.getCause(), e.getMessage());
 			return null;
 		}
 	}
 
 	@Override
 	public MainResponseDTO createProduct(ProductDTO productDTO) {
-		ValidateDTO validateDTO = productValidateRequestDTO.validateDataProduct(productDTO, true);
+		ValidateDTO validateDTO = productValidateRequestDTO.validateDataProduct(productDTO);
 		if (validateDTO != null) {
 			return new MainResponseDTO(validateDTO.getCode(), validateDTO.getField() + validateDTO.getError());
 		}
@@ -86,17 +107,17 @@ public class ProductService implements IProductsServices {
 
 		try {
 			productsRepository.save(productEntity);
-			log.info("create client Ok {}", productEntity);
+			log.info("createProduct Ok {}", productEntity);
 			return new MainResponseDTO(EnumMainResponse.OK.getCode(), EnumMainResponse.OK.getMessage());
 		} catch (Exception e) {
-			log.error("Error create client {}", e.getCause(), e.getMessage());
+			log.error("Error createProduct {}", e.getCause(), e.getMessage());
 			return new MainResponseDTO(EnumMainResponse.ERROR.getCode(), EnumMainResponse.ERROR.getMessage());
 		}
 	}
 
 	@Override
 	public MainResponseDTO updateProduct(ProductDTO productDTO) {
-		ValidateDTO validateDTO = productValidateRequestDTO.validateDataProduct(productDTO, false);
+		ValidateDTO validateDTO = productValidateRequestDTO.validateDataProduct(productDTO);
 		if (validateDTO != null) {
 			return new MainResponseDTO(validateDTO.getCode(), validateDTO.getField() + validateDTO.getError());
 		}
@@ -115,7 +136,7 @@ public class ProductService implements IProductsServices {
 			}
 		} catch (Exception e) {
 
-			log.error("Error al actualizar el cliente: {}", e.getMessage());
+			log.error("Error createProduct: {}", e.getMessage());
 			return new MainResponseDTO(EnumMainResponse.ERROR.getCode(), EnumMainResponse.ERROR.getMessage());
 		}
 	}
@@ -147,7 +168,7 @@ public class ProductService implements IProductsServices {
 				return new MainResponseDTO(EnumMainResponse.ERROR.getCode(), EnumMainResponse.ERROR.getMessage());
 			}
 		} catch (Exception e) {
-			log.error("Error al eliminar el cliente: {}", e.getMessage());
+			log.error("Error deleteProduct: {}", e.getMessage());
 			return new MainResponseDTO(EnumMainResponse.ERROR.getCode(), EnumMainResponse.ERROR.getMessage());
 		}
 

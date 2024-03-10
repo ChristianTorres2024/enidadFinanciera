@@ -11,7 +11,8 @@ import com.test.quind.persistent.entity.products.ProductEntity;
 public interface IProductsServices {
 
 	ProductDTO getProductById(Long id);
-
+	
+	List<ProductDTO> getProductByIdClient(Long id);
 
 	List<ProductDTO> getAllProduct();
 

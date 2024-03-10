@@ -37,13 +37,25 @@ public class ProductsRestController {
         
     }
     
+    @GetMapping("/getProductClientId/{id}")
+    private ResponseEntity<List<ProductDTO>> getProductClient(@PathVariable("id") Long clientID) {
+
+    	List<ProductDTO> products = productService.getProductByIdClient(clientID);
+         if(products != null && products.size() > 0) {
+         	return ResponseEntity.status(HttpStatus.OK).body(products);
+         }else {
+         	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
+         }
+        
+    }
+    
     
     @GetMapping("/getAllProducts")
     private ResponseEntity<List<ProductDTO>> getAllProducts() {
             
-        List<ProductDTO> clients = productService.getAllProduct();
-        if(clients != null && clients.size() > 0) {
-        	return ResponseEntity.status(HttpStatus.OK).body(clients);
+        List<ProductDTO> products = productService.getAllProduct();
+        if(products != null && products.size() > 0) {
+        	return ResponseEntity.status(HttpStatus.OK).body(products);
         }else {
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
         }

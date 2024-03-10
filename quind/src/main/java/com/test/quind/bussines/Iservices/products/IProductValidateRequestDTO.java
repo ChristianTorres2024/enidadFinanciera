@@ -5,6 +5,6 @@ import com.test.quind.domain.commons.DTO.ValidateDTO;
 
 @FunctionalInterface
 public interface IProductValidateRequestDTO {
-	ValidateDTO validateDataProduct(ProductDTO productDTO,Boolean actionCrear); 
+	ValidateDTO validateDataProduct(ProductDTO productDTO); 
 
 }
