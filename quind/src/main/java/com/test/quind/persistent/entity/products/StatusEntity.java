@@ -1,4 +1,4 @@
-package com.test.quind.persistent.entity;
+package com.test.quind.persistent.entity.products;
 
 import java.io.Serializable;
 
@@ -14,15 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "identification_type")
-public class IdentificationTypeEntity implements Serializable {
+@Table(name = "status")
+public class StatusEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@Column(name = "id")
-	private Long idType;
+	private Long idstatus;
 
-	@Column(name = "type_name")
-	private String typeName;
+	@Column(name = "status_name")
+	private String statusName;
 }

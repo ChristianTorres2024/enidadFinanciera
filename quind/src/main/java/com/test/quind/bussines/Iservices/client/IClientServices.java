@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
-import com.test.quind.persistent.entity.ClientEntity;
+import com.test.quind.persistent.entity.client.ClientEntity;
 
 public interface IClientServices {
 

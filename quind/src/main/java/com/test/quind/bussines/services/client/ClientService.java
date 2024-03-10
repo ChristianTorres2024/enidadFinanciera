@@ -16,7 +16,7 @@ import com.test.quind.domain.commons.DTO.ValidateDTO;
 import com.test.quind.domain.commons.Enums.EnumMainResponse;
 import com.test.quind.domain.commons.Enums.EnumValidateClientDTO;
 import com.test.quind.infrastructure.controller.rest.ClientRestController;
-import com.test.quind.persistent.entity.ClientEntity;
+import com.test.quind.persistent.entity.client.ClientEntity;
 import com.test.quind.persistent.repository.ClientRepository;
 
 @Service

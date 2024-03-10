@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 import com.test.quind.bussines.Iservices.client.IConvertClientDTOEntity;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.infrastructure.controller.rest.ClientRestController;
-import com.test.quind.persistent.entity.ClientEntity;
-import com.test.quind.persistent.entity.IdentificationTypeEntity;
+import com.test.quind.persistent.entity.client.ClientEntity;
+import com.test.quind.persistent.entity.client.IdentificationTypeEntity;
 
 @Component
 public class ConvertClientDTOEntity implements  IConvertClientDTOEntity{

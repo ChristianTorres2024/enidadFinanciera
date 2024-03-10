@@ -1,5 +1,9 @@
 package com.test.quind.infrastructure.controller.rest;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,48 +14,34 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.quind.bussines.Iservices.client.IClientServices;
-import com.test.quind.bussines.services.client.ClientService;
-import com.test.quind.domain.commons.DTO.ClientDTO;
+import com.test.quind.bussines.services.products.ProductService;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
-import com.test.quind.persistent.repository.ClientRepository;
+import com.test.quind.domain.commons.DTO.ProductDTO;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 @RestController
-@RequestMapping("/client")
-public class ClientRestController {
+@RequestMapping("/product")
+public class ProductsRestController {
 	
     @Autowired
-	private ClientService clientService;
+	private ProductService productService;
 
     
-    @GetMapping("/getClient/{id}")
-    private ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientID) {
+    @GetMapping("/getProduct/{id}")
+    private ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long productID) {
 
-    	ClientDTO client = clientService.getClientById(clientID);         
-    	return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
+    	ProductDTO product = productService.getProductById(productID);         
+    	return responseProduct(product,HttpStatus.OK,HttpStatus.NOT_FOUND);
         
     }
     
-    @GetMapping("/getClient/{typeID}/{numberID}")
-    private ResponseEntity<ClientDTO> getClient(@PathVariable("typeID") Long paramtypeID, @PathVariable("numberID") Long paramIdNumber) {
-             
-        ClientDTO client = clientService.findClientByIdTypeAndIdNumber(paramtypeID,paramIdNumber);         
-        return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
-
-    }
     
-    @GetMapping("/getAllClients")
-    private ResponseEntity<List<ClientDTO>> getAllClients() {
+    @GetMapping("/getAllProducts")
+    private ResponseEntity<List<ProductDTO>> getAllProducts() {
             
-        List<ClientDTO> clients = clientService.getAllClients();
+        List<ProductDTO> clients = productService.getAllProduct();
         if(clients != null && clients.size() > 0) {
         	return ResponseEntity.status(HttpStatus.OK).body(clients);
         }else {
@@ -60,23 +50,23 @@ public class ClientRestController {
         
     }    	
     
-    @PostMapping("/createClient")
-    public ResponseEntity<MainResponseDTO> createClient(@RequestBody ClientDTO clientDTO) {
-        MainResponseDTO response = clientService.createClient(clientDTO);
+    @PostMapping("/createProduct")
+    public ResponseEntity<MainResponseDTO> createProduct(@RequestBody ProductDTO productDTO) {
+        MainResponseDTO response = productService.createProduct(productDTO);
         return responseMain(response,HttpStatus.CREATED,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);        
     }
     
-    @PutMapping("/updateClient")
-    public ResponseEntity<MainResponseDTO> updateClient(@RequestBody ClientDTO clientDTO) {
+    @PutMapping("/updateProduct")
+    public ResponseEntity<MainResponseDTO> updateClient(@RequestBody ProductDTO clientDTO) {
 
-        MainResponseDTO response = clientService.updateClient(clientDTO);
+        MainResponseDTO response = productService.updateProduct(clientDTO);
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
     }
     
-    @DeleteMapping("/deleteClient/{id}")
-    private ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long clientID) {
+    @DeleteMapping("/deleteProduct/{id}")
+    private ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long productID) {
     	             
-        MainResponseDTO response = clientService.deleteClient(clientID);  
+        MainResponseDTO response = productService.deleteProduct(productID);  
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
               
     }
@@ -93,15 +83,14 @@ public class ClientRestController {
     	
     }
     
-	private ResponseEntity<ClientDTO> responseClient(ClientDTO clientDTO,HttpStatus successStatus, HttpStatus errorStatus) {
+	private ResponseEntity<ProductDTO> responseProduct(ProductDTO productsDTO,HttpStatus successStatus, HttpStatus errorStatus) {
     
-		if(clientDTO != null) {
-        	return ResponseEntity.status(successStatus).body(clientDTO);
+		if(productsDTO != null) {
+        	return ResponseEntity.status(successStatus).body(productsDTO);
         }else {
         	return ResponseEntity.status(errorStatus).body(null);        	
         }    
     }
-    	
-
-    
+	
 }
+    	

@@ -1,4 +1,4 @@
-package com.test.quind.persistent.entity;
+package com.test.quind.persistent.entity.client;
 
 import java.io.Serializable;
 import java.util.Date;
