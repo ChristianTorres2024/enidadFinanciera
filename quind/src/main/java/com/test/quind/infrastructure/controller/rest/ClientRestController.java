@@ -35,35 +35,51 @@ public class ClientRestController {
     
     @GetMapping("/getClient/{id}")
     private ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientID) {
-        log.info("Parametro: {}", clientID);
-        ClientDTO client = clientService.getClientById(clientID);         
-        return ResponseEntity.status(HttpStatus.OK).body(client);
+
+    	ClientDTO client = clientService.getClientById(clientID);         
+
+        if(client != null) {
+        	return ResponseEntity.status(HttpStatus.OK).body(client);
+        }else {
+        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
+        }
     }
     
     @GetMapping("/getClient/{typeID}/{numberID}")
     private ResponseEntity<ClientDTO> getClient(@PathVariable("typeID") Long paramtypeID, @PathVariable("numberID") Long paramIdNumber) {
-        log.info("Parametro 1: {}", paramtypeID);
-        log.info("Parametro 2: {}", paramIdNumber);        
+             
         ClientDTO client = clientService.findClientByIdTypeAndIdNumber(paramtypeID,paramIdNumber);         
-        return ResponseEntity.status(HttpStatus.OK).body(client);
+        if(client != null) {
+        	return ResponseEntity.status(HttpStatus.OK).body(client);
+        }else {
+        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
+        }
+
     }
     
     @GetMapping("/getAllClients")
     private ResponseEntity<List<ClientDTO>> getAllClients() {
             
-        List<ClientDTO> clients = clientService.getAllClients();     
-        return ResponseEntity.status(HttpStatus.OK).body(clients);
+        List<ClientDTO> clients = clientService.getAllClients();
+        if(clients != null && clients.size() > 0) {
+        	return ResponseEntity.status(HttpStatus.OK).body(clients);
+        }else {
+        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
+        }
+        
     }    	
     
     @PostMapping("/createClient")
     public ResponseEntity<MainResponseDTO> createClient(@RequestBody ClientDTO clientDTO) {
-
-    	log.info("Cliente creado: {}", clientDTO);
-        MainResponseDTO response = new MainResponseDTO();
-        response.setCode(0);
-        response.setMessage("return OK");
+        MainResponseDTO response = clientService.createClient(clientDTO);
         
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        if (response.getCode() == 0) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else if (response.getCode() == 1) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+        }
     }
     
     @PutMapping("/updateClient")

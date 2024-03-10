@@ -3,6 +3,7 @@ package com.test.quind.bussines.Iservices.client;
 import java.util.List;
 
 import com.test.quind.domain.commons.DTO.ClientDTO;
+import com.test.quind.domain.commons.DTO.MainResponseDTO;
 
 public interface IClientServices {
 
@@ -12,10 +13,10 @@ public interface IClientServices {
 
 	List<ClientDTO> getAllClients();
 
-	ClientDTO createClient(ClientDTO clientDTO);
+	MainResponseDTO createClient(ClientDTO clientDTO);
 
-	ClientDTO updateClient(Long id, ClientDTO clientDTO);
+	MainResponseDTO updateClient(Long id, ClientDTO clientDTO);
 
-	void deleteClient(Long id);
+	MainResponseDTO deleteClient(Long id);
 
 }

@@ -1,5 +1,25 @@
 package com.test.quind.domain.commons.Enums;
 
-public class EnumMainResponse {
+public enum EnumMainResponse {
+    
+	OK(0, "successful"),
+    ERRORDATA(1, "error - Verificar Data"),
+	ERROR(2, "error");
 
+    
+	private final int code;
+    private final String message;
+
+    EnumMainResponse(int code, String message) {
+        this.code = code;
+        this.message = message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

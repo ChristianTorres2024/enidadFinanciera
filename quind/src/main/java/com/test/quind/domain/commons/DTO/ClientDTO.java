@@ -17,11 +17,11 @@ import lombok.NoArgsConstructor;
 public class ClientDTO {
 	
 	@NotNull(message="id type no puede ser nulo")
-	@Size(min=2, max=50)
+	@Size(min=1, max=50)
 	private String identificationType;
 	
 	@NotNull(message="identificationNumber no puede ser nulo")
-	@Size(min=5, max=19)
+	@Size(min=4, max=19)
 	private Integer identificationNumber;
 	
 	@NotNull(message="El nombre no puede ser nulo")
