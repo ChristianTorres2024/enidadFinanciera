@@ -37,23 +37,15 @@ public class ClientRestController {
     private ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientID) {
 
     	ClientDTO client = clientService.getClientById(clientID);         
-
-        if(client != null) {
-        	return ResponseEntity.status(HttpStatus.OK).body(client);
-        }else {
-        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
-        }
+    	return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
+        
     }
     
     @GetMapping("/getClient/{typeID}/{numberID}")
     private ResponseEntity<ClientDTO> getClient(@PathVariable("typeID") Long paramtypeID, @PathVariable("numberID") Long paramIdNumber) {
              
         ClientDTO client = clientService.findClientByIdTypeAndIdNumber(paramtypeID,paramIdNumber);         
-        if(client != null) {
-        	return ResponseEntity.status(HttpStatus.OK).body(client);
-        }else {
-        	return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);        	
-        }
+        return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
 
     }
     
@@ -72,32 +64,45 @@ public class ClientRestController {
     @PostMapping("/createClient")
     public ResponseEntity<MainResponseDTO> createClient(@RequestBody ClientDTO clientDTO) {
         MainResponseDTO response = clientService.createClient(clientDTO);
-        
-        if (response.getCode() == 0) {
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } else if (response.getCode() == 1) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
-        }
+        return responseMain(response,HttpStatus.CREATED,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);        
     }
     
     @PutMapping("/updateClient")
     public ResponseEntity<MainResponseDTO> updateClient(@RequestBody ClientDTO clientDTO) {
 
-    	log.info("Cliente creado: {}", clientDTO);
-        MainResponseDTO response = new MainResponseDTO(0,"return OK");       
-        
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        MainResponseDTO response = clientService.updateClient(clientDTO);
+        return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
     }
     
     @DeleteMapping("/deleteClient/{id}")
     private ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long clientID) {
-        log.info("Parametro::", clientID);
-        
-        clientService.deleteClient(clientID);      
-        MainResponseDTO response = new MainResponseDTO(0,"return OK");
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+    	             
+        MainResponseDTO response = clientService.deleteClient(clientID);  
+        return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
+              
     }
+    
+    private ResponseEntity<MainResponseDTO> responseMain(MainResponseDTO mainResponseDTO,HttpStatus successStatus, HttpStatus errorStatus, HttpStatus errorBadrequest) {
+        
+    	if (mainResponseDTO.getCode() == 0) {
+            return ResponseEntity.status(successStatus).body(mainResponseDTO);
+        } else if (mainResponseDTO.getCode() == 1) {
+            return ResponseEntity.status(errorBadrequest).body(mainResponseDTO);
+        } else {
+            return ResponseEntity.status(errorStatus).body(mainResponseDTO);
+        }
+    	
+    }
+    
+	private ResponseEntity<ClientDTO> responseClient(ClientDTO clientDTO,HttpStatus successStatus, HttpStatus errorStatus) {
+    
+		if(clientDTO != null) {
+        	return ResponseEntity.status(successStatus).body(clientDTO);
+        }else {
+        	return ResponseEntity.status(errorStatus).body(null);        	
+        }    
+    }
+    	
+
     
 }

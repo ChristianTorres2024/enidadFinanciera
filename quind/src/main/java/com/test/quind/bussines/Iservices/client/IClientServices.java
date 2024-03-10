@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
+import com.test.quind.persistent.entity.ClientEntity;
 
 public interface IClientServices {
 
@@ -15,8 +16,11 @@ public interface IClientServices {
 
 	MainResponseDTO createClient(ClientDTO clientDTO);
 
-	MainResponseDTO updateClient(Long id, ClientDTO clientDTO);
+	MainResponseDTO updateClient(ClientDTO clientDTO);
+	
+	ClientEntity updateDataExistingClient(ClientEntity existingClient, ClientEntity clientEntity);
 
+	
 	MainResponseDTO deleteClient(Long id);
 
 }
