@@ -20,6 +20,10 @@ public class ClientDTO {
 	@Size(min=2, max=50)
 	private String identificationType;
 	
+	@NotNull(message="identificationNumber no puede ser nulo")
+	@Size(min=5, max=19)
+	private Integer identificationNumber;
+	
 	@NotNull(message="El nombre no puede ser nulo")
 	@Size(min=2, max=50, message="El nombre no puede ser menor a 2 y ser mayor a 50 caracteres")
 	private String firstName;

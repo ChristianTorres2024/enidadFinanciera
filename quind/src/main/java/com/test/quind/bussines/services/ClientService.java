@@ -83,6 +83,7 @@ public class ClientService implements IClientServices, IConvertEntityClientDTO {
 		clientDTO.setFirstName(clientEntity.getFirstName());
 		clientDTO.setLastName(clientEntity.getLastName());
 		clientDTO.setEmail(clientEntity.getEmailAddress());
+		clientDTO.setIdentificationNumber(clientEntity.getIdNumber());
 		try {
 			
 			Date dateOfBirth = dateFormat.parse(clientEntity.getDateOfBirth());

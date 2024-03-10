@@ -35,7 +35,7 @@ public class ClientEntity implements Serializable {
     private IdentificationTypeEntity identificationType;
 
 	@Column(name = "id_number")
-	private Long idNumber;
+	private Integer idNumber;
 
 	@Column(name = "first_name")
 	private String firstName;
