@@ -3,8 +3,7 @@ package com.test.quind.domain.commons.Enums;
 public enum EnumMainResponse {
     
 	OK(0, "successful"),
-    ERRORDATA(1, "error - Verificar Data"),
-	ERROR(2, "error");
+	ERROR(2, "Internal error");
 
     
 	private final int code;

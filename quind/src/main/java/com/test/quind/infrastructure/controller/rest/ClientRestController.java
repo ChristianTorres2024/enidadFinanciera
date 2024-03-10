@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.quind.bussines.Iservices.client.IClientServices;
-import com.test.quind.bussines.services.ClientService;
+import com.test.quind.bussines.services.client.ClientService;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.persistent.repository.ClientRepository;

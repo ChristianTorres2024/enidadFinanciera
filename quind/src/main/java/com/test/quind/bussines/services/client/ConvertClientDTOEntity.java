@@ -1,6 +1,5 @@
-package com.test.quind.bussines.services;
+package com.test.quind.bussines.services.client;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

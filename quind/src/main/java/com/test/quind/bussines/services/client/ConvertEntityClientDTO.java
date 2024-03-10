@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services;
+package com.test.quind.bussines.services.client;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +27,7 @@ public class ConvertEntityClientDTO implements IConvertEntityClientDTO{
 			return null;
 
 		ClientDTO clientDTO = new ClientDTO();
+		clientDTO.setIdClient(clientEntity.getIdClient());
 		clientDTO.setIdentificationType(clientEntity.getIdentificationType().getTypeName());
 		clientDTO.setFirstName(clientEntity.getFirstName());
 		clientDTO.setLastName(clientEntity.getLastName());
