@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.client;
+package com.test.quind.bussines.services;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,9 +7,13 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
-import com.test.quind.bussines.Iservices.client.IClientServices;
+import com.test.quind.bussines.Iservices.IClientServices;
+import com.test.quind.bussines.services.client.component.ClientValidateRequestDTO;
+import com.test.quind.bussines.services.client.component.ConvertClientDTOEntity;
+import com.test.quind.bussines.services.client.component.ConvertEntityClientDTO;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.domain.commons.DTO.ValidateDTO;
@@ -20,6 +24,7 @@ import com.test.quind.persistent.entity.client.ClientEntity;
 import com.test.quind.persistent.repository.ClientRepository;
 
 @Service
+@Configuration
 public class ClientService implements IClientServices {
 
 	private Logger log = LoggerFactory.getLogger(ClientRestController.class);

@@ -1,8 +1,9 @@
-package com.test.quind.bussines.services.products;
+package com.test.quind.bussines.services.products.component;
 
 
 import org.springframework.stereotype.Component;
-import com.test.quind.bussines.Iservices.products.IProductValidateRequestDTO;
+
+import com.test.quind.bussines.Iservices.products.component.IProductValidateRequestDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;
 import com.test.quind.domain.commons.DTO.ValidateDTO;
 import com.test.quind.domain.commons.Enums.EnumValidatePoductDTO;

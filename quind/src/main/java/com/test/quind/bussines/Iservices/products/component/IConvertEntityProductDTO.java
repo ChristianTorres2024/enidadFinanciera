@@ -1,4 +1,4 @@
-package com.test.quind.bussines.Iservices.products;
+package com.test.quind.bussines.Iservices.products.component;
 
 import java.text.ParseException;
 

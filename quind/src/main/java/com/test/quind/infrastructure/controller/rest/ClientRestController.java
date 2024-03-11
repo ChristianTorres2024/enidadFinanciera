@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.quind.bussines.Iservices.client.IClientServices;
-import com.test.quind.bussines.services.client.ClientService;
+import com.test.quind.bussines.Iservices.IClientServices;
+import com.test.quind.bussines.services.ClientService;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.persistent.repository.ClientRepository;
@@ -31,9 +31,17 @@ public class ClientRestController {
     @Autowired
 	private ClientService clientService;
 
+
+    public ClientRestController(ClientService clientService) {
+        this.clientService = clientService;
+    }
     
-    @GetMapping("/getClient/{id}")
-    private ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientID) {
+    
+   
+
+
+	@GetMapping("/getClient/{id}")
+	public ResponseEntity<ClientDTO> getClient(@PathVariable("id") Long clientID) {
 
     	ClientDTO client = clientService.getClientById(clientID);         
     	return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
@@ -41,7 +49,7 @@ public class ClientRestController {
     }
     
     @GetMapping("/getClient/{typeID}/{numberID}")
-    private ResponseEntity<ClientDTO> getClient(@PathVariable("typeID") Long paramtypeID, @PathVariable("numberID") Long paramIdNumber) {
+	public ResponseEntity<ClientDTO> getClient(@PathVariable("typeID") Long paramtypeID, @PathVariable("numberID") Long paramIdNumber) {
              
         ClientDTO client = clientService.findClientByIdTypeAndIdNumber(paramtypeID,paramIdNumber);         
         return responseClient(client,HttpStatus.OK,HttpStatus.NOT_FOUND);
@@ -49,7 +57,7 @@ public class ClientRestController {
     }
     
     @GetMapping("/getAllClients")
-    private ResponseEntity<List<ClientDTO>> getAllClients() {
+	public ResponseEntity<List<ClientDTO>> getAllClients() {
             
         List<ClientDTO> clients = clientService.getAllClients();
         if(clients != null && clients.size() > 0) {
@@ -74,7 +82,7 @@ public class ClientRestController {
     }
     
     @DeleteMapping("/deleteClient/{id}")
-    private ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long clientID) {
+	public ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long clientID) {
     	             
         MainResponseDTO response = clientService.deleteClient(clientID);  
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);

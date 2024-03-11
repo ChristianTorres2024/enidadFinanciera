@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.client;
+package com.test.quind.bussines.services.client.component;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 
-import com.test.quind.bussines.Iservices.client.IClientValidateRequestDTO;
+import com.test.quind.bussines.Iservices.client.component.IClientValidateRequestDTO;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.ValidateDTO;
 import com.test.quind.domain.commons.Enums.EnumValidateClientDTO;

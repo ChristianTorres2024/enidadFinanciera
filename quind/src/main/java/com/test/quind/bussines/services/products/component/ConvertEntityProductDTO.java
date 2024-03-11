@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.products;
+package com.test.quind.bussines.services.products.component;
 
 
 
@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.test.quind.bussines.Iservices.products.IConvertEntityProductDTO;
+import com.test.quind.bussines.Iservices.products.component.IConvertEntityProductDTO;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;
 import com.test.quind.infrastructure.controller.rest.ClientRestController;

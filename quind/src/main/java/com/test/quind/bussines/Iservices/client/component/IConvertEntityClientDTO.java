@@ -1,4 +1,4 @@
-package com.test.quind.bussines.Iservices.client;
+package com.test.quind.bussines.Iservices.client.component;
 
 import java.text.ParseException;
 

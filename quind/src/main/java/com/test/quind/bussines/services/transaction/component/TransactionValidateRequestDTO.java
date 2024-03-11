@@ -1,8 +1,8 @@
-package com.test.quind.bussines.services.transaction;
+package com.test.quind.bussines.services.transaction.component;
 
 import org.springframework.stereotype.Component;
 
-import com.test.quind.bussines.Iservices.transaction.ITransactionValidateRequestDTO;
+import com.test.quind.bussines.Iservices.transaction.component.ITransactionValidateRequestDTO;
 import com.test.quind.domain.commons.DTO.TransactionDTO;
 import com.test.quind.domain.commons.DTO.ValidateDTO;
 import com.test.quind.domain.commons.Enums.EnumValidatePoductDTO;

@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.products;
+package com.test.quind.bussines.services;
 
 import java.text.ParseException;
 import java.util.List;
@@ -10,8 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.test.quind.bussines.Iservices.client.IClientServices;
-import com.test.quind.bussines.Iservices.products.IProductsServices;
+import com.test.quind.bussines.Iservices.IClientServices;
+import com.test.quind.bussines.Iservices.IProductsServices;
+import com.test.quind.bussines.services.products.component.ConvertEntityProductDTO;
+import com.test.quind.bussines.services.products.component.ConvertProductDTOEntity;
+import com.test.quind.bussines.services.products.component.ProductValidateRequestDTO;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;

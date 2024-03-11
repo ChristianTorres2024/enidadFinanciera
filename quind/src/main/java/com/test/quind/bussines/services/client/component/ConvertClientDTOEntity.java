@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.client;
+package com.test.quind.bussines.services.client.component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.test.quind.bussines.Iservices.client.IConvertClientDTOEntity;
+import com.test.quind.bussines.Iservices.client.component.IConvertClientDTOEntity;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.infrastructure.controller.rest.ClientRestController;
 import com.test.quind.persistent.entity.client.ClientEntity;

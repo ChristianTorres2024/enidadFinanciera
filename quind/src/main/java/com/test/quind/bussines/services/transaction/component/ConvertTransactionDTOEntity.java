@@ -1,4 +1,4 @@
-package com.test.quind.bussines.services.transaction;
+package com.test.quind.bussines.services.transaction.component;
 
 
 import java.text.ParseException;
@@ -11,9 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.test.quind.bussines.Iservices.client.IConvertClientDTOEntity;
-import com.test.quind.bussines.Iservices.products.IConvertProductDTOEntity;
-import com.test.quind.bussines.Iservices.transaction.IConvertTransactionDTOEntity;
+import com.test.quind.bussines.Iservices.client.component.IConvertClientDTOEntity;
+import com.test.quind.bussines.Iservices.products.component.IConvertProductDTOEntity;
+import com.test.quind.bussines.Iservices.transaction.component.IConvertTransactionDTOEntity;
 import com.test.quind.domain.commons.DTO.ClientDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;
 import com.test.quind.domain.commons.DTO.TransactionDTO;

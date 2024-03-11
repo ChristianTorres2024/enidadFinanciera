@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.quind.bussines.services.products.ProductService;
-import com.test.quind.bussines.services.transaction.TransactionService;
+import com.test.quind.bussines.services.ProductService;
+import com.test.quind.bussines.services.TransactionService;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;
 import com.test.quind.domain.commons.DTO.TransactionDTO;
@@ -30,9 +30,12 @@ public class TransactionRestController {
     @Autowired
 	private TransactionService transactionService;
 
+    public TransactionRestController(TransactionService transactionService) {
+        this.transactionService = transactionService;
+    }
     
     @GetMapping("/getTransaction/{id}")
-    private ResponseEntity<TransactionDTO> getTransaction(@PathVariable("id") Long TransactionID) {
+    public ResponseEntity<TransactionDTO> getTransaction(@PathVariable("id") Long TransactionID) {
 
     	TransactionDTO transaction = transactionService.getTransactionById(TransactionID);         
     	return responseProduct(transaction,HttpStatus.OK,HttpStatus.NOT_FOUND);
@@ -41,7 +44,7 @@ public class TransactionRestController {
     
     
     @GetMapping("/getTransactionProductId/{id}")
-    private ResponseEntity<List<TransactionDTO>> getTransactionProductId(@PathVariable("id") Long productID) {
+    public ResponseEntity<List<TransactionDTO>> getTransactionProductId(@PathVariable("id") Long productID) {
 
     	List<TransactionDTO> products = transactionService.getTransactionByIdProduct(productID);
          if(products != null && products.size() > 0) {
@@ -54,7 +57,7 @@ public class TransactionRestController {
     
     
     @GetMapping("/getAllTransaction")
-    private ResponseEntity<List<TransactionDTO>> getAllTransaction() {
+    public ResponseEntity<List<TransactionDTO>> getAllTransaction() {
             
         List<TransactionDTO> transaction = transactionService.getAllTransaction();
         if(transaction != null && transaction.size() > 0) {
@@ -71,22 +74,22 @@ public class TransactionRestController {
         return responseMain(response,HttpStatus.CREATED,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);        
     }
     
-    @PutMapping("/updateTransaction")
     public ResponseEntity<MainResponseDTO> updateTransaction(@RequestBody TransactionDTO transactionDTO) {
-
-        MainResponseDTO response = new MainResponseDTO(2,"no se permite Actualizar una Transaccion");
-        return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
+        MainResponseDTO response = new MainResponseDTO();
+        response.setCode(2); 
+        response.setMessage("No se permite actualizar una transacción");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
     
     @DeleteMapping("/deleteTransaction/{id}")
-    private ResponseEntity<MainResponseDTO> deleteTransaction(@PathVariable("id") Long transactionID) {
+    public ResponseEntity<MainResponseDTO> deleteTransaction(@PathVariable("id") Long transactionID) {
     	             
         MainResponseDTO response = transactionService.deleteTransaction(transactionID);  
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
               
     }
     
-    private ResponseEntity<MainResponseDTO> responseMain(MainResponseDTO mainResponseDTO,HttpStatus successStatus, HttpStatus errorStatus, HttpStatus errorBadrequest) {
+    public ResponseEntity<MainResponseDTO> responseMain(MainResponseDTO mainResponseDTO,HttpStatus successStatus, HttpStatus errorStatus, HttpStatus errorBadrequest) {
         
     	if (mainResponseDTO.getCode() == 0) {
             return ResponseEntity.status(successStatus).body(mainResponseDTO);
@@ -98,7 +101,7 @@ public class TransactionRestController {
     	
     }
     
-	private ResponseEntity<TransactionDTO> responseProduct(TransactionDTO transactionDTO,HttpStatus successStatus, HttpStatus errorStatus) {
+    public ResponseEntity<TransactionDTO> responseProduct(TransactionDTO transactionDTO,HttpStatus successStatus, HttpStatus errorStatus) {
     
 		if(transactionDTO != null) {
         	return ResponseEntity.status(successStatus).body(transactionDTO);

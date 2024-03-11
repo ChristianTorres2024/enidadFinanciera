@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.test.quind.bussines.services.products.ProductService;
+import com.test.quind.bussines.services.ProductService;
 import com.test.quind.domain.commons.DTO.MainResponseDTO;
 import com.test.quind.domain.commons.DTO.ProductDTO;
 
@@ -29,8 +29,12 @@ public class ProductsRestController {
 	private ProductService productService;
 
     
+    public ProductsRestController(ProductService productService) {
+        this.productService = productService;
+    }
+    
     @GetMapping("/getProduct/{id}")
-    private ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long productID) {
+	public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") Long productID) {
 
     	ProductDTO product = productService.getProductById(productID);         
     	return responseProduct(product,HttpStatus.OK,HttpStatus.NOT_FOUND);
@@ -38,7 +42,7 @@ public class ProductsRestController {
     }
     
     @GetMapping("/getProductClientId/{id}")
-    private ResponseEntity<List<ProductDTO>> getProductClient(@PathVariable("id") Long clientID) {
+	public ResponseEntity<List<ProductDTO>> getProductClient(@PathVariable("id") Long clientID) {
 
     	List<ProductDTO> products = productService.getProductByIdClient(clientID);
          if(products != null && products.size() > 0) {
@@ -51,7 +55,7 @@ public class ProductsRestController {
     
     
     @GetMapping("/getAllProducts")
-    private ResponseEntity<List<ProductDTO>> getAllProducts() {
+	public ResponseEntity<List<ProductDTO>> getAllProducts() {
             
         List<ProductDTO> products = productService.getAllProduct();
         if(products != null && products.size() > 0) {
@@ -69,14 +73,14 @@ public class ProductsRestController {
     }
     
     @PutMapping("/updateProduct")
-    public ResponseEntity<MainResponseDTO> updateClient(@RequestBody ProductDTO clientDTO) {
+    public ResponseEntity<MainResponseDTO> updateProduct(@RequestBody ProductDTO clientDTO) {
 
         MainResponseDTO response = productService.updateProduct(clientDTO);
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
     }
     
     @DeleteMapping("/deleteProduct/{id}")
-    private ResponseEntity<MainResponseDTO> deleteClient(@PathVariable("id") Long productID) {
+    public ResponseEntity<MainResponseDTO> deleteProduct(@PathVariable("id") Long productID) {
     	             
         MainResponseDTO response = productService.deleteProduct(productID);  
         return responseMain(response,HttpStatus.OK,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.BAD_REQUEST);
