@@ -360,7 +360,7 @@ BEGIN
                     SET balance = destination_balance + NEW.amount
                     WHERE id = NEW.destination_account_id;
                 ELSE                   
-                    CALL raise_error('1 : No se puede realizar la consignación porque la cuenta de destino está cancelada');
+                    CALL raise_error('1 : No se puede realizar la consignación porque la cuenta de destino está cancelada o no existe');
                 END IF;
                 
             WHEN 2 THEN
@@ -374,7 +374,7 @@ BEGIN
                     SET balance = source_balance - NEW.amount
                     WHERE id = NEW.source_account_id;
                 ELSE
-                     CALL raise_error('2 : No se puede realizar la consignación porque la cuenta de destino está cancelada');
+                     CALL raise_error('2 : No se puede realizar la consignación porque la cuenta de Origen está cancelada o no existe');
                 END IF;
                 
             WHEN 3 THEN
@@ -396,7 +396,7 @@ BEGIN
                     SET balance = destination_balance + NEW.amount
                     WHERE id = NEW.destination_account_id;
                 ELSE
-					CALL raise_error('3 :No se puede realizar la consignación porque la cuenta de destino está cancelada');                   
+					CALL raise_error('3 :No se puede realizar la consignación porque la cuenta de destino y/o Origen está cancelada  o no existe');                   
                 END IF;
         END CASE;
     END IF;
