@@ -232,7 +232,7 @@ DROP TRIGGER IF EXISTS quind_db.BALANCE_BEFORE_INSERT $$
 CREATE DEFINER = CURRENT_USER TRIGGER quind_db.BALANCE_BEFORE_INSERT BEFORE INSERT ON products FOR EACH ROW
 BEGIN
     IF NEW.balance < 0 THEN
-        CALL raise_error('El saldo de la cuenta no puede ser menor que $0.');
+        CALL raise_error('El saldo inicial de la cuenta no puede ser menor que $0.');
     END IF;
 END$$
 
@@ -241,9 +241,11 @@ USE quind_db$$
 DROP TRIGGER IF EXISTS quind_db.BALANCE_BEFORE_UPDATE $$
 CREATE DEFINER = CURRENT_USER TRIGGER quind_db.BALANCE_BEFORE_UPDATE BEFORE UPDATE ON products FOR EACH ROW
 BEGIN
+	IF NEW.account_type_id IN (2) THEN
 		IF NEW.balance < 0 THEN
-			CALL raise_error('El saldo de la cuenta no puede ser menor que $0.');
+			CALL raise_error('El saldo de la cuenta de Ahorros no puede ser menor que $0.');
 		END IF;
+	END IF;
 END$$
 
 DELIMITER $$
